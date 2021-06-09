@@ -33,6 +33,11 @@ app.post('/create', async (req, res) => {
 	}
 })
 
+app.get('/getcalendar', async (req, res) => {
+	let consultas = await AppointmentService.GetAll(false);
+	res.json(consultas);
+});
+
 
 
 const PORT = process.env.PORT || 3001;
