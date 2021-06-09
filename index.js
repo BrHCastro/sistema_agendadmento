@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const AppointmentService = require('./services/AppointmentService');
 
 
 app.use(express.static('public'));
@@ -14,12 +15,23 @@ mongoose.connect('mongodb://localhost:27017/sistema_agendadmento', {useNewUrlPar
 
 
 app.get('/', (req, res) => {
-	res.send('Hello, world!');
+	res.render('index');
 });
 
 app.get('/cadastro', (req, res) => {
 	res.render('create');
 });
+
+app.post('/create', async (req, res) => {
+	let {name, email, cpf, description, date, time} = req.body;
+	let status = await AppointmentService.Create(name, email, cpf, description, date, time);
+
+	if (status) {
+		res.redirect('/');
+	} else {
+		res.send("Houve uma falha!")
+	}
+})
 
 
 
