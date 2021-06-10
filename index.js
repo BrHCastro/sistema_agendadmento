@@ -15,11 +15,11 @@ mongoose.connect('mongodb://localhost:27017/sistema_agendadmento', {useNewUrlPar
 mongoose.set('useFindAndModify', false);
 
 app.get('/', (req, res) => {
-	res.render('index');
+	res.render('index', {title: 'Início', link: 'inicio'});
 });
 
 app.get('/cadastro', (req, res) => {
-	res.render('create');
+	res.render('create', {title: 'Cadastro', link: 'cadastro'});
 });
 
 app.post('/create', async (req, res) => {
@@ -40,7 +40,7 @@ app.get('/getcalendar', async (req, res) => {
 
 app.get('/event/:id', async (req, res) => {
 	let result = await AppointmentService.GetOne(req.params.id);
-	res.render('event', {result});
+	res.render('event', {result: result, title: 'Visualizar', link: 'visualizar'});
 });
 
 app.post('/finish', async (req, res) => {
@@ -55,6 +55,22 @@ app.post('/finish', async (req, res) => {
 	}
 
 });
+
+app.get('/list', async (req, res) => {
+	let appos = await AppointmentService.GetAll(true);
+	res.render('list', {appos: appos, title: 'Lista', link: 'lista'});
+});
+
+app.get('/search', async (req, res) => {
+	let query = req.query.search;
+	let appos = await AppointmentService.Search(query);
+	res.render('list', {appos: appos, title: 'Lista', link: 'lista'});
+});
+
+
+
+
+
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

@@ -59,6 +59,15 @@ class AppointmentService {
             return false;
         }
     }
+
+    async Search(query) {
+        try {
+            return await Appo.find().or([{email: query}, {cpf: query}]);
+        } catch (err) {
+            console.log(err);
+            return [];
+        }
+    }
 }
 
 module.exports = new AppointmentService;
