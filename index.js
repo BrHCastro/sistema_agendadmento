@@ -67,10 +67,7 @@ app.get('/search', async (req, res) => {
 	res.render('list', {appos: appos, title: 'Lista', link: 'lista'});
 });
 
-
-
-
-
+//Servidor------------------------------------------------------------------------------
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
