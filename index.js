@@ -67,6 +67,13 @@ app.get('/search', async (req, res) => {
 	res.render('list', {appos: appos, title: 'Lista', link: 'lista'});
 });
 
+var pollTime = 1000 * 60 * 5;
+setInterval(async () => {
+
+	await AppointmentService.SendNotification();
+
+}, pollTime);
+
 //Servidor------------------------------------------------------------------------------
 
 const PORT = process.env.PORT || 3001;

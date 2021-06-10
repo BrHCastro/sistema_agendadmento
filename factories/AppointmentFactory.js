@@ -16,6 +16,8 @@ class AppointmentFactory{
             title: simpleAppo.name + " - " + simpleAppo.description,
             start: startDate,
             end: startDate,
+            notified: simpleAppo.notified,
+            email: simpleAppo.email
         }
 
         return appo;
