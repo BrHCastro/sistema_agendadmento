@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 mongoose.connect('mongodb://localhost:27017/sistema_agendadmento', {useNewUrlParser: true, useUnifiedTopology: true});
-
+mongoose.set('useFindAndModify', false);
 
 app.get('/', (req, res) => {
 	res.render('index');
@@ -43,6 +43,18 @@ app.get('/event/:id', async (req, res) => {
 	res.render('event', {result});
 });
 
+app.post('/finish', async (req, res) => {
+	let id = req.body.id;
+
+	let result = await AppointmentService.Finish(id);
+
+	if (result) {
+		res.redirect('/');
+	} else {
+		console.log(result);
+	}
+
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

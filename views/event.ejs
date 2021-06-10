@@ -15,7 +15,7 @@
     <div class="container">
         <div class="card shadow p-3 mb-5 bg-body rounded">
             <div class="card-body">
-                <form method="POST" action="create">
+                <form method="POST" action="/finish">
                     <div class="input-group mb-4 shadow-sm">
                         <span class="input-group-text" id="basic-addon1"><i class="fas fa-user-plus"></i></span>
                         <input class="form-control" type="text" name="name" id="name" placeholder="Nome do paciente" autocomplete="off" value="<%= result.name %>" />
@@ -40,6 +40,8 @@
                         <span class="input-group-text"><i class="fas fa-edit"></i></span>
                         <textarea class="form-control" name="description" id="description" placeholder="Descrição / Observações"><%= result.description %></textarea>
                     </div>
+
+                    <input type="hidden" name="id" value="<%= result._id %>">
                     <% if(!result.finished){ %>
                     <div class="d-grid mt-3">
                         <button class="btn btn-success">Finalizar Consulta</button>
