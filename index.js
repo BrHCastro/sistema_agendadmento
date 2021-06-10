@@ -34,10 +34,14 @@ app.post('/create', async (req, res) => {
 })
 
 app.get('/getcalendar', async (req, res) => {
-	let consultas = await AppointmentService.GetAll(false);
-	res.json(consultas);
+	let appoitments = await AppointmentService.GetAll(false);
+	res.json(appoitments);
 });
 
+app.get('/event/:id', async (req, res) => {
+	let result = await AppointmentService.GetOne(req.params.id);
+	res.render('event', {result});
+});
 
 
 const PORT = process.env.PORT || 3001;

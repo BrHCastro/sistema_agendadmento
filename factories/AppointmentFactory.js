@@ -10,13 +10,12 @@ class AppointmentFactory{
         let minute = Number.parseInt(simpleAppo.time.split(':')[1]);
 
         let startDate = new Date(year, month, day, hour, minute,0,0);
-        startDate.setHours(startDate.getHours()-3); //Convertendo para horario padão do brasil (GMT-3)
 
         let appo = {
             id: simpleAppo._id,
             title: simpleAppo.name + " - " + simpleAppo.description,
             start: startDate,
-            end: startDate
+            end: startDate,
         }
 
         return appo;
